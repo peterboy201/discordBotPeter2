@@ -1,11 +1,12 @@
+import os  # เพิ่มบรรทัดนี้เข้ามาด้านบนสุด
 import discord
 from discord.ext import commands
+from myserver import server_on
 
 intents = discord.Intents.default()
 intents.message_content = True
 intents.voice_states = True
 
-from myserver import server_on
 # กำหนด Prefix ให้เป็นเครื่องหมายตกใจ (!)
 bot = commands.Bot(command_prefix="!", intents=intents)
 
@@ -33,7 +34,8 @@ async def quit_bot(ctx):
     else:
         await ctx.send("ตอนนี้ผมไม่ได้อยู่ในห้องเสียงไหนเลยนะ")
 
-
+# เรียกใช้ฟังก์ชันเปิดเว็บเซอร์เวอร์ (เขียนให้ชิดซ้ายสุด ห้ามมีเว้นวรรค)
 server_on()
-# รันบอทด้วย Token ใหม่ของคุณ
+
+# รันบอทด้วย Token จากระบบ Environment Variable
 bot.run(os.getenv("DISCORD_TOKEN"))
